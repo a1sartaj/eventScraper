@@ -11,7 +11,7 @@ function Navbar() {
   }, []);
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:5000/api/auth/google";
+    window.location.href = `${process.env.VITE_API_URL}/auth/google`;
   };
 
   const handleLogout = () => {
