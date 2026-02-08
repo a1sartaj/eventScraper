@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
 function PrivateRoute({ children }) {
     const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ function PrivateRoute({ children }) {
             }
 
             try {
-                const res = await axios.get("http://localhost:5000/api/auth/verify", {
+                const res = await axiosInstance.get("/auth/verify", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
