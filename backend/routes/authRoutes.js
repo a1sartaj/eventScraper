@@ -12,7 +12,7 @@ authRouter.get("/google", passport.authenticate("google", { scope: ["profile", "
 authRouter.get("/google/callback", passport.authenticate("google", { session: false, failureRedirect: "/" }), (req, res) => {
         const { token } = req.user;
 
-        res.redirect(`http://localhost:5173/login-success?token=${token}`);
+        res.redirect(`${process.env.FRONTEND_URL}/login-success?token=${token}`);
     }
 );
 
