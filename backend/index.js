@@ -21,7 +21,16 @@ app.use(passport.initialize())
 connectDB()
 
 // Run scraper every 6 hours
-cron.schedule("0 */6 * * *", scrapeEvents);
+cron.schedule("0 */6 * * *", async () => {
+    console.log("Auto scraping started...");
+
+    try {
+        await scrapeEvents();
+        console.log("Auto scraping finished");
+    } catch (err) {
+        console.error("Cron error:", err.message);
+    }
+});
 
 
 app.get('/', (req, res) => {
