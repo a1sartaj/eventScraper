@@ -6,7 +6,7 @@ import LoginSuccess from "./pages/LoginSuccess";
 import PrivateRoute from "./utils/PrivateRoutes";
 import Dashboard from "./pages/Dashboard";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Toaster position="top-right" />

@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
-function PrivateRoute({ children }) {
-    const [loading, setLoading] = useState(true);
-    const [valid, setValid] = useState(false);
+const PrivateRoute = ({ children }) => {
+    const [loading, setLoading] = useState(true)
+    const [valid, setValid] = useState(false)
 
     useEffect(() => {
         const verify = async () => {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem("token")
 
             if (!token) {
                 setLoading(false);
@@ -21,8 +21,8 @@ function PrivateRoute({ children }) {
                 });
 
                 setValid(res.data.valid);
-            } catch {
-                localStorage.removeItem("token");
+            } catch (error) {
+                localStorage.removeItem("token")
             } finally {
                 setLoading(false);
             }

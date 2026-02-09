@@ -22,4 +22,4 @@ const emailCaptureSchema = new mongoose.Schema(
 
 const EmailCapture = mongoose.model('EmailCapture', emailCaptureSchema)
 
-export default EmailCapture;
+export default EmailCapture

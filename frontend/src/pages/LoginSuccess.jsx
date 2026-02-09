@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-function LoginSuccess() {
-  const [params] = useSearchParams();
-  const navigate = useNavigate();
+const LoginSuccess = () => {
+  const [params] = useSearchParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const token = params.get("token");

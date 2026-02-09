@@ -2,11 +2,11 @@ import express from "express";
 import passport from "../config/passport.js";
 import jwt from "jsonwebtoken";
 
-const authRouter = express.Router();
+const authRouter = express.Router()
 
 // Start Google login
 authRouter.get("/google", passport.authenticate("google", { scope: ["profile", "email"] })
-);
+)
 
 // Google callback
 authRouter.get(
@@ -17,9 +17,9 @@ authRouter.get(
 
     res.redirect(
       `${process.env.FRONTEND_URL}/login-success?token=${token}`
-    );
+    )
   }
-);
+)
 
 
 
@@ -34,7 +34,7 @@ authRouter.get("/verify", (req, res) => {
     } catch (err) {
         res.status(401).json({ valid: false });
     }
-});
+})
 
 
 export default authRouter;

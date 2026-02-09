@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import axiosInstance from "../api/axiosInstance";
 
-function EmailModal({ event, onClose }) {
+const EmailModal = ({ event, onClose }) => {
     const [email, setEmail] = useState("");
     const [consent, setConsent] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ function EmailModal({ event, onClose }) {
         try {
             setLoading(true);
 
-            await axiosInstance.post("/email", {
+            const response = await axiosInstance.post("/email", {
                 email,
                 consent,
                 eventId: event._id,

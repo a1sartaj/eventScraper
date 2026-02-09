@@ -2,50 +2,50 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 import toast from "react-hot-toast";
 
-function Dashboard() {
-  const [events, setEvents] = useState([]);
+const Dashboard = () => {
+  const [events, setEvents] = useState([])
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
-  const [city, setCity] = useState("Sydney");
+  const [city, setCity] = useState("Sydney")
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🎨 Status badge color
+  // Status badge color
   const getStatusColor = (status) => {
     switch (status) {
       case "new":
-        return "bg-green-100 text-green-700";
+        return "bg-green-100 text-green-700"
       case "updated":
-        return "bg-yellow-100 text-yellow-700";
+        return "bg-yellow-100 text-yellow-700"
       case "inactive":
         return "bg-gray-200 text-gray-600";
       case "imported":
-        return "bg-blue-100 text-blue-700";
+        return "bg-blue-100 text-blue-700"
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-gray-100 text-gray-700"
     }
   };
 
-  // 📅 Safe Date format
+  // Safe Date format
   const formatDate = (date) => {
     if (!date || date === "Date not available") return "N/A";
     const d = new Date(date);
     return isNaN(d) ? date : d.toLocaleDateString();
   };
 
-  // 📡 Fetch events
+  // ----------- Fetch events-----------
   const fetchEvents = async () => {
     try {
       setLoading(true);
 
-      const res = await axiosInstance.get(
+      const response = await axiosInstance.get(
         `/events/dashboard?city=${city}&search=${search}&startDate=${startDate}&endDate=${endDate}`
       );
 
-      setEvents(res.data);
+      setEvents(response.data);
     } catch (err) {
-      toast.error("Failed to load events");
+      toast.error("Failed to load events")
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,7 @@ function Dashboard() {
     return () => clearInterval(interval);
   }, [city, startDate, endDate]);
 
-  // 📥 Import Event
+  // Import Event
   const importEvent = async (id) => {
     try {
       await axiosInstance.post(
@@ -71,17 +71,17 @@ function Dashboard() {
         }
       );
 
-      toast.success("Event Imported");
-      fetchEvents();
-    } catch {
+      toast.success("Event Imported")
+      fetchEvents()
+    } catch (error) {
       toast.error("Import failed");
     }
-  };
+  }
 
-  // 🔎 Search debounce-like
+  // Search debounce like
   useEffect(() => {
-    const timer = setTimeout(fetchEvents, 400);
-    return () => clearTimeout(timer);
+    const timer = setTimeout(fetchEvents, 400)
+    return () => clearTimeout(timer)
   }, [search]);
 
   return (

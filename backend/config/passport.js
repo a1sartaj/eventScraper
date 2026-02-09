@@ -1,6 +1,6 @@
-import passport from "passport";
-import User from "../models/User.js";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import passport from "passport"
+import User from "../models/User.js"
+import { Strategy as GoogleStrategy } from "passport-google-oauth20"
 import jwt from "jsonwebtoken";
 
 
@@ -13,7 +13,7 @@ passport.use(new GoogleStrategy(
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
-      let user = await User.findOne({ googleId: profile.id });
+      let user = await User.findOne({ googleId: profile.id })
 
       if (!user) {
         user = await User.create({
@@ -30,7 +30,7 @@ passport.use(new GoogleStrategy(
         { expiresIn: "7d" }
       );
 
-      return done(null, { user, token });
+      return done(null, { user, token })
     } catch (error) {
       return done(error, null);
     }

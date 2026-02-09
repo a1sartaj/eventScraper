@@ -1,18 +1,18 @@
-import express from 'express';
+import express from 'express'
 import 'dotenv/config'
 import cors from 'cors'
-import connectDB from './config/db.js';
-import Event from './models/Event.js';
-import { scrapeEvents } from './scraper/scrapeEvents.js';
-import cron from 'node-cron';
-import eventRouter from './routes/eventRoutes.js';
-import emailRouter from './routes/emailRoutes.js';
-import authRouter from './routes/authRoutes.js';
-import passport from "./config/passport.js";
+import connectDB from './config/db.js'
+import Event from './models/Event.js'
+import { scrapeEvents } from './scraper/scrapeEvents.js'
+import cron from 'node-cron'
+import eventRouter from './routes/eventRoutes.js'
+import emailRouter from './routes/emailRoutes.js'
+import authRouter from './routes/authRoutes.js'
+import passport from "./config/passport.js"
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 
 app.use(express.json());
 app.use(cors());
@@ -22,13 +22,13 @@ connectDB()
 
 // Run scraper every 6 hours
 cron.schedule("0 */6 * * *", async () => {
-    console.log("Auto scraping started...");
+    console.log("Auto scraping started...")
 
     try {
         await scrapeEvents();
         console.log("Auto scraping finished");
     } catch (err) {
-        console.error("Cron error:", err.message);
+        console.error("Cron error:", err.message)
     }
 });
 
@@ -56,8 +56,8 @@ app.get("/test-save", async (req, res) => {
 });
 
 app.get("/scrape", async (req, res) => {
-    await scrapeEvents();
-    res.send("Scraping done");
+    await scrapeEvents()
+    res.send("Scraping done")
 });
 
 app.use('/api/events', eventRouter)
@@ -66,7 +66,7 @@ app.use('/api/auth', authRouter)
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`)
 })
 
 

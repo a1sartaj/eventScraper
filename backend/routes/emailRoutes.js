@@ -1,10 +1,10 @@
 import express from "express";
-import EmailCapture from "../models/EmailCapture.js";
+import EmailCapture from "../models/EmailCapture.js"
 
 const emailRouter = express.Router();
 
 emailRouter.post("/", async (req, res) => {
-    const { email, consent, eventId } = req.body;
+    const { email, consent, eventId } = req.body
 
     if (!email || !consent) {
         return res.status(400).json({ message: "Email & consent required" });
@@ -16,7 +16,7 @@ emailRouter.post("/", async (req, res) => {
         eventId,
     });
 
-    res.json(saved);
-});
+    res.json(saved)
+})
 
-export default emailRouter;
+export default emailRouter

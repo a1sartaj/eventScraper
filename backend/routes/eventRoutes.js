@@ -9,7 +9,7 @@ eventRouter.get("/", async (req, res) => {
     const events = await Event.find({ status: { $ne: "inactive" } }).sort({ createdAt: -1 });
 
     res.json(events);
-});
+})
 
 
 eventRouter.get("/dashboard", async (req, res) => {
@@ -36,7 +36,7 @@ eventRouter.get("/dashboard", async (req, res) => {
     const events = await Event.find(query).sort({ createdAt: -1 });
 
     res.json(events);
-});
+})
 
 
 eventRouter.post("/import/:id", async (req, res) => {
@@ -56,8 +56,8 @@ eventRouter.post("/import/:id", async (req, res) => {
     await event.save();
 
     res.json(event);
-});
+})
 
 
 
-export default eventRouter;
+export default eventRouter

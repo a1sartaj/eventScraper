@@ -3,25 +3,25 @@ import toast from "react-hot-toast";
 import EmailModal from "../components/EmailModal";
 import axiosInstance from "../api/axiosInstance";
 
-function Home() {
+const Home = () => {
     const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     const fetchEvents = async () => {
         try {
             setLoading(true);
-            const res = await axiosInstance.get("/events");
-            setEvents(res.data);
+            const response = await axiosInstance.get("/events")
+            setEvents(response.data);
         } catch (error) {
-            toast.error("Failed to load events");
+            toast.error("Failed to load events")
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
     };
 
     useEffect(() => {
-        fetchEvents();
+        fetchEvents()
     }, []);
 
     return (
@@ -47,7 +47,7 @@ function Home() {
                         <h3 className="font-semibold text-lg">{ev.title}</h3>
 
                         <p className="text-xs text-gray-500">
-                            📅 {ev.dateTime && ev.dateTime !== "Date not available"
+                            {ev.dateTime && ev.dateTime !== "Date not available"
                                 ? new Date(ev.dateTime).toLocaleDateString()
                                 : "Date not available"}
                         </p>
